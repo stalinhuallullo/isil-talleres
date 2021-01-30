@@ -1,0 +1,162 @@
+<section class="breadcrumb-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-content">
+          <div class="section-heading">
+            <h2 class="section__title">Todos los cursos</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="course-area padding-top-120px padding-bottom-120px">
+  <div class="course-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="filter-bar d-flex justify-content-between align-items-center">
+            <ul class="filter-bar-tab nav nav-tabs align-items-center" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active icon-element" id="grid-view-tab" data-toggle="tab" href="#grid-view" role="tab" aria-controls="grid-view" aria-selected="true">
+                  <span data-toggle="tooltip" data-placement="top" title="Grid View">
+                      <i class="la la-th-large"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="nav-item font-size-15 ml-2">Mostrando {{ secciones.length }} resultados</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="course-content-wrapper mt-4">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="sidebar">
+
+              <form [formGroup]="form" novalidate>
+
+
+                <div class="sidebar-widget mb-5">
+                  <h3 class="widget-title">Categoría</h3>
+                  <span class="section-divider"></span>
+                  <div class="filter-by-category">
+                    <select class="form-control" #selectCategoria (change)="cambiarCategoria(selectCategoria.value)" formControlName="categoria" >
+                      <option value="">--Seleccionar--</option>
+                      <option *ngFor="let categoria of categorias;" value="{{categoria.id}}">{{categoria.nombre}}</option>
+                    </select>
+                  </div>
+
+
+                  <h3 class="widget-title mt-5">Talleres</h3>
+                  <span class="section-divider"></span>
+                  <div class="filter-by-category">
+                    <select class="form-control" formControlName="taller">
+                      <option value="">--Seleccionar--</option>
+                    </select>
+                  </div>
+
+                  <h3 class="widget-title mt-5">Edades</h3>
+                  <span class="section-divider"></span>
+                  <div class="filter-by-category">
+                    <select class="form-control" formControlName="edad">
+                      <option value="">--Seleccionar--</option>
+                    </select>
+                  </div>
+
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade show active" id="grid-view" aria-labelledby="grid-view-tab">
+
+
+                <div class="row">
+
+                  <div class="col-lg-4 column-td-half">
+                    <div class="card-item card-preview" data-tooltip-content="#tooltip_content_1">
+                      <div class="card-image">
+                        <a href="javascript:void(0);" class="card__img"><img src="../../../../../../assets/images/img6.jpg" alt=""></a>
+                      </div>
+                      <div class="card-content">
+                        <p class="card__label">
+                          <span class="card__label-text">deporte</span>
+                        </p>
+                        <h3 class="card__title">
+                          <a href="javascript:void(0);">curso 1</a>
+                        </h3>
+                        <p class="card__author">
+                          <a href="javascript:void(0);" style="text-transform: inherit">lunes</a><br>
+                          <a href="javascript:void(0);">de 04:00 pm a 05:00 pm</a>
+                        </p>
+                        <div class="card-price-wrap d-flex justify-content-between align-items-center">
+                          <span class="card__price">S/ 50.00</span>
+                          <div class="rating-wrap d-flex mt-2 mb-3">
+                            <ul class="review-stars">
+                              <li><span class="la la-star"></span></li>
+                            </ul>
+                            <span class="star-rating-wrap">
+                              <span class="star__rating">9</span>
+                            </span>
+                          </div>
+                        </div>
+                        <div>
+                          <a href="javascript:void(0);" class="theme-btn d-block w-100" style=" text-align: center; padding: 0 15px; ">Agregar al carrito</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-4 column-td-half">
+                    <div class="card-item card-preview" data-tooltip-content="#tooltip_content_1">
+                      <div class="card-image">
+                        <a href="javascript:void(0);" class="card__img"><img src="../../../../../../assets/images/img6.jpg" alt=""></a>
+                      </div>
+                      <div class="card-content">
+                        <p class="card__label">
+                          <span class="card__label-text">deporte</span>
+                        </p>
+                        <h3 class="card__title">
+                          <a href="javascript:void(0);">curso 1</a>
+                        </h3>
+                        <p class="card__author">
+                          <a href="javascript:void(0);" style="text-transform: inherit">lunes</a><br>
+                          <a href="javascript:void(0);">de 04:00 pm a 05:00 pm</a>
+                        </p>
+                        <div class="card-price-wrap d-flex justify-content-between align-items-center">
+                          <span class="card__price">S/ 50.00</span>
+                          <div class="rating-wrap d-flex mt-2 mb-3">
+                            <ul class="review-stars">
+                              <li><span class="la la-star"></span></li>
+                            </ul>
+                            <span class="star-rating-wrap">
+                              <span class="star__rating">9</span>
+                            </span>
+                          </div>
+                        </div>
+                        <div>
+                          <a href="javascript:void(0);" class="theme-btn d-block w-100" style=" text-align: center; padding: 0 15px; ">Agregar al carrito</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

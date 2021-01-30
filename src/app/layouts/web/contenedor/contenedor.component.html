@@ -1,0 +1,100 @@
+<header class="header-menu-area none-print">
+    <div class="header-top">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="header-widget">
+                        <ul class="header-action-list">
+                            <li>
+                                <a href="mailto:antonyhuallullo@gmail.com" class="font-size-20">
+                                    <span>Informes: </span>
+                                    <span class="la la-envelope-o mr-2"></span>
+                                    <u>antonyhuallullo@gmail.com</u>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="header-widget d-flex align-items-center justify-content-end">
+                        <div class="header-right-info">
+                            <ul class="header-social-profile">
+                                <li><a href="javascript:void(0)" class="font-size-20">Facebook <i class="fa fa-facebook ml-2"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="header-right-info">
+                          <div class="shop-cart">
+                            <ul>
+                              <li>
+                                <p class="shop-cart-btn d-flex align-items-center font-size-30">
+                                  <i class="la la-shopping-cart"></i>
+                                  <span class="product-count ml-1">15</span>
+                                </p>
+                                <ul class="cart-dropdown-menu">
+                                  <li><a href="javascript:void(0)" class="theme-btn w-100 text-center">Ir al carrito</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-menu-content">
+        <div class="container-fluid">
+            <div class="main-menu-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-2">
+                        <div class="logo-box">
+                            <a [routerLink]="['/']" class="logo"><img src="https://ed.team/static/images/logo/logo.svg" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="menu-wrapper">
+                          <div class="menu-category mr-5">
+                            <ul>
+                              <li>
+                                <a href="#"><i class="la la-th-large mr-1"></i>Categorias</a>
+                                <ul class="cat-dropdown-menu">
+                                  <li *ngFor="let categoria of categorias">
+                                    <a [routerLink]="['catalogo/cursos/'+ categoria.id]" >{{categoria.nombre}} <i class="la la-angle-right"></i></a>
+                                    <ul class="sub-menu">
+                                      <li *ngFor="let taller of categoria.talleres"><a (click)="irCategoria($event, categoria)" [routerLink]="['catalogo/cursos/'+ categoria.id + '/' + taller.id]" >{{taller.nombre}}</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                            <nav class="main-menu">
+                                <ul>
+                                    <li><a [routerLink]="['/catalogo/cursos']">Cursos</a></li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<router-outlet></router-outlet>
+
+
+<section class="footer-area section-bg-2 padding-bottom-40px none-print">
+    <div class="container">
+
+        <div class="copyright-content m-0">
+            <div class="row align-items-center">
+                <div class="col-lg-12 text-center">
+                    <p class="copy__desc">&copy; Todos los Derechos Reservados</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

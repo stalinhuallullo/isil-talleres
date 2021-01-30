@@ -1,0 +1,33 @@
+<div class="card-item card-preview" data-tooltip-content="#tooltip_content_1">
+  <div class="card-image">
+    <a [routerLink]="['/catalogo/cursos/detalle/' + ele.id]" class="card__img"><img [src]="validarImagen(ele)" alt=""></a>
+ </div>
+  <div class="card-content">
+    <p class="card__label">
+      <span class="card__label-text">{{ ele.taller.categoria.nombre }}</span>
+    </p>
+    <h3 class="card__title">
+      <a [routerLink]="['/catalogo/cursos/detalle/' + ele.id]">{{ ele.taller.nombre }} ({{ ele.edad.nombre }})</a>
+    </h3>
+    <p class="card__author">
+      <a href="javascript:void(0);" style="text-transform: inherit">{{ ele.dia.nombre }}</a><br>
+      <a href="javascript:void(0);">{{ ele.hora.nombre }}</a>
+      <!--<br>
+      <span>Cupos disponibles: {{ cuposDisponibles }} alumnos</span>-->
+    </p>
+    <div class="card-price-wrap d-flex justify-content-between align-items-center">
+      <span class="card__price">S/ {{ parseNumber(ele.precio).toFixed(2) }}</span>
+      <div class="rating-wrap d-flex mt-2 mb-3">
+        <ul class="review-stars">
+          <li><span class="la la-star"></span></li>
+        </ul>
+        <span class="star-rating-wrap">
+              <span class="star__rating">{{ ele.calificacion }}</span>
+            </span>
+      </div>
+    </div>
+    <div>
+      <a [routerLink]="['/catalogo/cursos/detalle/' + ele.id]" class="theme-btn d-block w-100" style=" text-align: center; padding: 0 15px; ">Agregar al carrito</a>
+    </div>
+  </div>
+</div>

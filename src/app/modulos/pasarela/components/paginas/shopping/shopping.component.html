@@ -1,0 +1,80 @@
+<section class="breadcrumb-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-content">
+          <div class="section-heading">
+            <h2 class="section__title" style="text-transform: inherit">Carrito de cursos y talleres</h2>
+          </div>
+          <p>Compra tus cursos 100% seguro</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cart-area padding-top-120px padding-bottom-60px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12" >
+        <div class="shopping-cart-wrap table-responsive">
+          <table class="table table-bordered ">
+            <thead class="cart-head">
+            <tr>
+              <td class="cart__title" style="width: 150px">Imagen</td>
+              <td class="cart__title">Curso</td>
+              <td class="cart__title" style="width: 150px">Precio</td>
+              <td class="cart__title" style="width: 150px">Eliminar</td>
+            </tr>
+            </thead>
+            <tbody class="cart-body">
+            <tr >
+              <td><a [routerLink]="['/catalogo/cursos/detalle/1']" class="d-block"><img src="../../../../../../assets/images/img6.jpg" alt="product image"></a></td>
+              <td>
+                <div class="cart-product-desc">
+                  <a [routerLink]="['/catalogo/cursos/detalle/1']" class="widget-title">curso 1
+                    <br>lunes
+                    <br>de 04:00 pm a 05:00 pm</a>
+                </div>
+              </td>
+              <td>
+                <span class="item__price">S/ 50.00</span>
+              </td>
+              <td>
+                <button type="button" class="button-remove"><i class="fa fa-close"></i></button>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="cart-detail-wrap mt-4">
+      <div class="row">
+        <div class="col-lg-4 ml-auto">
+          <div class="shopping-cart-detail-item">
+            <h3 class="widget-title font-size-20">Totales del carrito</h3>
+            <div class="shopping-cart-content pt-2">
+              <ul class="list-items">
+                <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                  <span class="primary-color">Subtotal:</span>
+                  <span class="primary-color-3">S/ 50.00</span>
+                </li>
+                <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                  <span class="primary-color">Total:</span>
+                  <span class="primary-color-3">S/ 50.00</span>
+                </li>
+              </ul>
+              <div class="btn-box mt-4">
+                <a [routerLink]="['/pasarela/checkout']" class="theme-btn">Matricúlate</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+

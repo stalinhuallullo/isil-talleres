@@ -1,0 +1,463 @@
+<section class="breadcrumb-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-content">
+          <div class="section-heading">
+            <h2 class="section__title">Datos de la compra</h2>
+          </div>
+          <p>Revisar la lista de cursos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-group-search{
+    position: relative;
+  }
+  .form-group-search input{
+    width: calc(100% - 100px);
+  }
+  .form-group-search button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+
+</style>
+
+
+<section class="checkout-area padding-top-120px padding-bottom-70px">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-8">
+        <div class="card-box-shared">
+          <div class="card-box-shared-title">
+            <h3 class="widget-title mb-2 font-size-27">Datos para la matrícula y pago</h3>
+            <p class="m-0">- Datos obligatorios (*)</p>
+            <p class="m-0">- Los menores de edad deberán completar también los datos de un padre o apoderado</p>
+          </div>
+          <div class="card-box-shared-body">
+            <div class="user-form">
+              <div class="contact-form-action">
+
+                <form>
+
+
+                  <div class="row">
+                    <div class="col-md-12"><h4 class="mb-3">Datos del alumno</h4></div>
+
+
+                    <div class="col-lg-7 col-md-6 col-sm-12">
+                      <div class="input-box">
+                        <label class="label-text">DNI:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <div style="position: relative">
+                            <input class="form-control" type="text"  placeholder="DNI" >
+                            <span class="la la-user input-icon"></span>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                      <div class="input-box">
+                        <label class="label-text">Fecha de nacimiento:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="date"   placeholder="Fecha de nacimiento">
+                          <span class="la la-calendar input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Nombres:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Nombres">
+                          <span class="la la-user input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Apellido paterno:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Apellido paterno">
+                          <span class="la la-user input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Apellido materno:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Apellido materno">
+                          <span class="la la-user input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Sexo:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <div class="sort-ordering user-form-short">
+                            <select class="sort-ordering-select form-control" >
+                              <option value="Hombre" [selected]="true">Hombre</option>
+                              <option value="Mujer">Mujer</option>
+                              <option value="Otros">Otros</option>
+                            </select>
+                            <span class="la la-user input-icon"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Dirección de domicilio:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Dirección">
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Distrito de domicilio:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Departamento (nacimiento):</label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Provincia (nacimiento):</label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Distrito (nacimiento):</label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Número de teléfono fijo:</label>
+                        <div class="form-group">
+                          <input class="form-control" type="number"  placeholder="Número de teléfono fijo">
+                          <span class="la la-phone input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Número de móvil (celular):<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="number"  placeholder="Número de móvil (celular) ">
+                          <span class="la la-mobile-phone input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <label class="label-text">Correo electrónico:<span class="primary-color-2 ml-1">*</span> </label> <span class="ml-1">(Para acceso al dictado de clases del alumno)</span>
+                        <div class="form-group">
+                          <input class="form-control" type="email"  placeholder="Correo electrónico">
+                          <span class="la la-envelope input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <label class="label-text">Confirmar correo electrónico:<span class="primary-color-2 ml-1">*</span> </label>
+                        <div class="form-group">
+                          <input class="form-control" type="email"  placeholder="Repetir correo electrónico">
+                          <span class="la la-envelope input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Tipo de seguro médico:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <div class="sort-ordering user-form-short">
+                            <select class="form-control" >
+                              <option>Seleccionar</option>
+                            </select>
+                            <span class="la la-file input-icon"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Tipo de grupo sanguíneo:</label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-file input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <label class="label-text">Enfermedades y/o alergias que padece el estudiante:</label>
+                        <div class="form-group">
+                          <textarea class="form-control" rows="1"  placeholder="Enfermedades y/o alergias que padece el estudiante"></textarea>
+                          <span class="la la-file input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <label class="label-text">Antibióticos y/o medicinas que deba ser suministrado en caso de emergencia:</label>
+                        <div class="form-group">
+                          <textarea class="form-control" rows="1"  placeholder="Antibióticos y/o medicinas que deba ser suministrado en caso de emergencia"></textarea>
+                          <span class="la la-file input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </form>
+
+                <form>
+                  <div class="row form-group-optional mt-3">
+                    <!-- APODERADO -->
+                    <div class="col-md-12"><h4 class="mb-3">Datos del padre o apoderado</h4></div>
+
+                    <div class="col-lg-7 col-md-6 col-sm-12">
+                      <div class="input-box">
+                        <label class="label-text">DNI:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <div style="position: relative">
+                            <input class="form-control" type="text"  placeholder="DNI">
+                            <span class="la la-user input-icon"></span>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                      <div class="input-box">
+                        <label class="label-text">Fecha de nacimiento:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="date"  placeholder="Fecha de nacimiento">
+                          <span class="la la-calendar input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Nombres:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Nombres">
+                          <span class="la la-user input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Apellido paterno:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Apellido paterno">
+                          <span class="la la-user input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Apellido materno:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Apellido materno">
+                          <span class="la la-user input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Dirección de domicilio:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Dirección">
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Distrito de domicilio:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Departamento (nacimiento):<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <select class="form-control"  >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Provincia (nacimiento):<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-box">
+                        <label class="label-text">Distrito (nacimiento):<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <select class="form-control" >
+                            <option>Seleccionar</option>
+                          </select>
+                          <span class="la la-map-marker input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Número de teléfono fijo:</label>
+                        <div class="form-group">
+                          <input class="form-control" type="number"  placeholder="Número de teléfono fijo" >
+                          <span class="la la-phone input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="input-box">
+                        <label class="label-text">Número de móvil (celular):<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="text"  placeholder="Número de móvil (celular) ">
+                          <span class="la la-mobile-phone input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <label class="label-text">Correo electrónico:<span class="primary-color-2 ml-1">*</span></label>
+                        <div class="form-group">
+                          <input class="form-control" type="email"  placeholder="Correo electrónico">
+                          <span class="la la-envelope input-icon"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="input-box">
+                        <div class="secure-connection">
+                          <p class="d-flex align-items-center">
+                            <i class="fa fa-lock font-size-30"></i>
+                            <span class="ml-2">Conexión segura</span>
+                          </p>
+                          <p class="font-size-14">¡Su información está segura con nosotros!</p>
+                        </div>
+                        <br>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-4">
+        <div class="card-box-shared">
+          <div class="card-box-shared-title">
+            <h3 class="widget-title font-size-18">Resumen del pedido</h3>
+          </div>
+          <div class="card-box-shared-body">
+            <div class="shopping-cart-content">
+              <ul class="list-items">
+
+                <li class="d-flex align-items-center justify-content-between font-size-18 font-weight-bold">
+                  <span class="primary-color">Total:</span>
+                  <span class="primary-color-3">S/ 50.00</span>
+                </li>
+              </ul>
+              <div class="btn-box mt-2">
+                <p class="font-size-14 line-height-22 mb-2">Al completar su compra, acepta estos Términos y Condiciones de Pago y Servicios.</p>
+                <a [routerLink]="['/pasarela/voucher/15/1234']" class="theme-btn d-block text-center w-100">Procesar compra</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<ng-template let-modal>
+
+
+
+</ng-template>
+
+
+
