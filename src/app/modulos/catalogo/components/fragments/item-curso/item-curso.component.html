@@ -1,7 +1,7 @@
 <div class="card-item card-preview" data-tooltip-content="#tooltip_content_1">
   <div class="card-image">
     <a [routerLink]="['/catalogo/cursos/detalle/' + ele.id]" class="card__img"><img [src]="validarImagen(ele)" alt=""></a>
- </div>
+  </div>
   <div class="card-content">
     <p class="card__label">
       <span class="card__label-text">{{ ele.taller.categoria.nombre }}</span>
@@ -27,7 +27,10 @@
       </div>
     </div>
     <div>
-      <a [routerLink]="['/catalogo/cursos/detalle/' + ele.id]" class="theme-btn d-block w-100" style=" text-align: center; padding: 0 15px; ">Agregar al carrito</a>
+      <button (click)="agregarCarrito(ele)" *ngIf="!isSeleccionado &&  cuposDisponibles > 0" class="theme-btn d-block theme-btn-light w-100" style=" text-align: center; padding: 0 15px; ">
+        <i class="la la-shopping-cart" style="margin-right: 5px;font-size: 20px;"></i>Agregar al carrito</button>
+      <a [routerLink]="['/pasarela/shopping']" *ngIf="isSeleccionado &&  cuposDisponibles > 0" class="theme-btn d-block w-100" style=" text-align: center; padding: 0 15px; ">Ir al carrito</a>
+      <span class="btn w-100 mb-3 btn-secondary" *ngIf="cuposDisponibles <= 0">AGOTADO</span>
     </div>
   </div>
 </div>

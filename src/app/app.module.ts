@@ -12,12 +12,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ResumenCarritoComponent} from './components/resumen-carrito/resumen-carrito.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PortadaComponent,
     ContenedorComponent,
+    ResumenCarritoComponent,
   ],
   imports: [
     BrowserModule,

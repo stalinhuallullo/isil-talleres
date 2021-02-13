@@ -1,0 +1,41 @@
+<div class="shop-cart">
+  <ul>
+    <li>
+      <p class="shop-cart-btn d-flex align-items-center font-size-30">
+        <i class="la la-shopping-cart"></i>
+        <span class="product-count ml-1">{{ cantidadCarrito }}</span>
+      </p>
+      <ul class="cart-dropdown-menu">
+
+        <li *ngFor="let seccion of secciones" style="position:relative;">
+          <a [routerLink]="['/catalogo/cursos/detalle/' + seccion.id]" class="cart-link">
+            <img [src]="validarImagen(seccion)" alt="product">
+          </a>
+          <p class="cart-info">
+            <a [routerLink]="['/catalogo/cursos/detalle/' + seccion.id]">{{ seccion.taller.nombre }} ({{ seccion.edad.nombre }} años)</a>
+            <span class="cart__author">{{ seccion.dia?.nombre }}</span>
+            <span class="cart__author">{{ seccion.hora?.nombre }}</span>
+            <span class="cart__author">{{ seccion.taller.categoria?.nombre }}</span>
+            <span class="cart__price">S/ {{ parseNumber(seccion.precio).toFixed(2) }}</span>
+          </p>
+          <a href="javascript:void(0)" style="
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  height: 25px;
+                  width: 25px;
+                  color: red;
+                  text-align: center;
+                  display: none;
+                  " (click)="eliminarSeccionCarrito(seccion)">X</a>
+        </li>
+        <li>
+          <p class="cart-total">Total: S/ {{ parseNumber(total).toFixed(2) }}</p>
+        </li>
+        <li>
+          <a class="theme-btn w-100 text-center" [routerLink]="['/pasarela/shopping']">Ir al carrito</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

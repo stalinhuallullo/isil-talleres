@@ -15,30 +15,20 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="header-widget d-flex align-items-center justify-content-end">
-                        <div class="header-right-info">
-                            <ul class="header-social-profile">
-                                <li><a href="javascript:void(0)" class="font-size-20">Facebook <i class="fa fa-facebook ml-2"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="header-right-info">
-                          <div class="shop-cart">
-                            <ul>
-                              <li>
-                                <p class="shop-cart-btn d-flex align-items-center font-size-30">
-                                  <i class="la la-shopping-cart"></i>
-                                  <span class="product-count ml-1">15</span>
-                                </p>
-                                <ul class="cart-dropdown-menu">
-                                  <li><a href="javascript:void(0)" class="theme-btn w-100 text-center">Ir al carrito</a></li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                    </div>
+              <div class="col-lg-6">
+                <div class="header-widget d-flex align-items-center justify-content-end">
+                  <div class="header-right-info">
+                    <app-resumen-carrito></app-resumen-carrito>
+                  </div>
+                  <!-- <div class="header-right-info">
+                      <ul class="header-action-list">
+                          <li><a href="login.html">Login</a></li>
+                          <li>or</li>
+                          <li><a href="sign-up.html">Register</a></li>
+                      </ul>
+                  </div> -->
                 </div>
+              </div>
             </div>
         </div>
     </div>
@@ -70,7 +60,8 @@
                           </div>
                             <nav class="main-menu">
                                 <ul>
-                                    <li><a [routerLink]="['/catalogo/cursos']">Cursos</a></li>
+                                  <li><a [routerLink]="['/']">Inicio</a></li>
+                                  <li><a [routerLink]="['/catalogo/cursos']">Cursos</a></li>
                                 </ul>
                             </nav>
 

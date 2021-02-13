@@ -12,8 +12,30 @@
     </div>
   </div>
 </section>
+<section class="cart-area padding-top-120px padding-bottom-60px" *ngIf="secciones.length == 0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="error-content text-center">
+          <svg viewBox="0 0 512.025 512.025">
+            <path d="m512.021 97.968h-89.616c.257 3.436.39 6.906.39 10.406 0 34.357-12.591 65.826-33.395 90.046v87.442h-30v-61.241c-9.297 6.018-19.359 10.949-30.004 14.618v46.623h-30v-39.926c-4.921.532-9.916.813-14.976.813-5.078 0-10.09-.283-15.028-.819v39.932h-30v-46.641c-10.646-3.674-20.707-8.611-30.004-14.634v61.275h-30v-87.504c-20.773-24.212-33.343-55.656-33.343-89.984 0-3.5.133-6.97.39-10.406h-56.125l-15.298-97.911h-75.008v30h49.332l65.314 418.027h29.239c-2.049 5.268-3.186 10.987-3.186 16.971 0 25.899 21.071 46.971 46.971 46.971s46.971-21.071 46.971-46.971c0-5.983-1.137-11.703-3.186-16.971h123.764c-2.049 5.268-3.186 10.987-3.186 16.971 0 25.899 21.07 46.971 46.97 46.971s46.971-21.071 46.971-46.971-21.071-46.971-46.971-46.971h-258.681l-7.863-50.326h324.631z"/>
+            <path d="m284.421 0c-59.758 0-108.375 48.616-108.375 108.374s48.617 108.375 108.375 108.375 108.374-48.617 108.374-108.375-48.616-108.374-108.374-108.374zm-48.335 123.374v-30h96.669v30z"/>
+          </svg>
 
-<section class="cart-area padding-top-120px padding-bottom-60px">
+          <div class="section-heading mt-5">
+            <h3 class="section__title pb-3">¡Ups! El carrito está vacío</h3>
+            <p class="section__desc">Parece que no has agregado ningún taller a la compra</p>
+          </div>
+          <div class="btn-box">
+            <a [routerLink]="['/']" class="theme-btn">Volver al inicio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cart-area padding-top-120px padding-bottom-60px" *ngIf="secciones.length > 0">
   <div class="container">
     <div class="row">
       <div class="col-lg-12" >
@@ -28,20 +50,20 @@
             </tr>
             </thead>
             <tbody class="cart-body">
-            <tr >
-              <td><a [routerLink]="['/catalogo/cursos/detalle/1']" class="d-block"><img src="../../../../../../assets/images/img6.jpg" alt="product image"></a></td>
+            <tr  *ngFor="let seccion of secciones">
+              <td><a [routerLink]="['/catalogo/cursos/detalle/' + seccion.id]" class="d-block"><img [src]="validarImagen(seccion)" alt="product image"></a></td>
               <td>
                 <div class="cart-product-desc">
-                  <a [routerLink]="['/catalogo/cursos/detalle/1']" class="widget-title">curso 1
-                    <br>lunes
-                    <br>de 04:00 pm a 05:00 pm</a>
+                  <a [routerLink]="['/catalogo/cursos/detalle/' + seccion.id]" class="widget-title">{{ seccion.taller.nombre }} ({{ seccion.edad.nombre }})
+                    <br>{{ seccion.dia.nombre }}
+                    <br>{{ seccion.hora.nombre }}</a>
                 </div>
               </td>
               <td>
-                <span class="item__price">S/ 50.00</span>
+                <span class="item__price">S/ {{ parseNumber(seccion.precio).toFixed(2) }}</span>
               </td>
               <td>
-                <button type="button" class="button-remove"><i class="fa fa-close"></i></button>
+                <button type="button" class="button-remove" (click)="eliminarSeccionCarrito(seccion)" ><i class="fa fa-close"></i></button>
               </td>
             </tr>
 
@@ -52,6 +74,23 @@
     </div>
     <div class="cart-detail-wrap mt-4">
       <div class="row">
+        <!--<div class="col-lg-6">
+          <div class="shopping-cart-detail-item">
+            <h3 class="widget-title font-size-20">Cupón promocional</h3>
+            <div class="shopping-cart-content pt-2">
+
+              <div class="contact-form-action pt-3">
+                <form method="post">
+                  <div class="form-group">
+                    <i class="la la-pencil input-icon"></i>
+                    <input class="form-control" type="text" name="text" placeholder="Introduce el código de cupón">
+                  </div>
+                  <button type="submit" class="theme-btn theme-btn-light">Aplicar cupón</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>-->
         <div class="col-lg-4 ml-auto">
           <div class="shopping-cart-detail-item">
             <h3 class="widget-title font-size-20">Totales del carrito</h3>
@@ -59,11 +98,11 @@
               <ul class="list-items">
                 <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
                   <span class="primary-color">Subtotal:</span>
-                  <span class="primary-color-3">S/ 50.00</span>
+                  <span class="primary-color-3">S/ {{ parseNumber(total).toFixed(2) }}</span>
                 </li>
                 <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
                   <span class="primary-color">Total:</span>
-                  <span class="primary-color-3">S/ 50.00</span>
+                  <span class="primary-color-3">S/ {{ parseNumber(total).toFixed(2) }}</span>
                 </li>
               </ul>
               <div class="btn-box mt-4">
