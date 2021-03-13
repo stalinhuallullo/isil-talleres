@@ -22,118 +22,189 @@
 <section class="cart-area padding-bottom-60px">
   <div id="parentdiv" class="container">
 
-    <div >
+    <div *ngIf="matricula !== undefined">
+      <h1 class="text-center mb-5">Confirmación de Matrícula</h1>
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <img src="https://ed.team/static/images/logo/logo.svg" alt="" style="width: 300px">
+          <div><strong class="color_bold">Municipalidad Distrital de Lima</strong></div>
+          <br>
+        </div>
+        <div class="col-md-6 text-right">
+
+          <h1 class="widget-title">Voucher</h1>
+          <div>N°. recibo: <strong class="color_bold">{{ matricula?.nro_recibo }}</strong></div>
+          <div>Recibo ID: <strong class="color_bold">{{ matricula?.recibo_id }}</strong></div>
+          <div>Dirección: <strong class="color_bold">Jirón Conde de Superunda 141 - Cercado de Lima</strong></div>
+          <div>Teléfono: <strong class="color_bold">(01) 632-1300</strong></div>
+
+        </div>
+      </div>
+
+      <div class="cart-detail-wrap mt-4">
         <div class="row">
 
-          <div class="col-md-6">
-            <img src="https://ed.team/static/images/logo/logo.svg" alt="" style="width: 300px">
+          <div class="col-lg-6">
+            <div class="shopping-cart-detail-item">
+              <h3 class="widget-title font-size-20">Datos personales</h3>
+              <div class="shopping-cart-content pt-2">
+
+                <ul class="list-items">
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">Nombre:</span>
+                    <span class="primary-color-3">{{ matricula?.estudiante.nombres + '  ' + matricula?.estudiante.ape_paterno + '  ' + matricula?.estudiante.ape_materno  }}</span>
+                  </li>
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">DNI:</span>
+                    <span class="primary-color-3">{{ matricula?.estudiante.dni  }}</span>
+                  </li>
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">Número de móvil:</span>
+                    <span class="primary-color-3">{{ matricula?.estudiante.movil  }}</span>
+                  </li>
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">Correo electrónico:</span>
+                    <span class="primary-color-3">{{ matricula?.estudiante.correo  }}</span>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 ml-auto">
+            <div class="shopping-cart-detail-item">
+              <h3 class="widget-title font-size-20">Datos de la transacción</h3>
+              <div class="shopping-cart-content pt-2">
+                <ul class="list-items">
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">Número de pedido:</span>
+                    <span class="primary-color-3">{{ matricula?.transaccion?.purchaseNumber  }}</span>
+                  </li>
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">N° de tarjeta enmascarada:</span>
+                    <span class="primary-color-3">{{ matricula?.transaccion?.card }}</span>
+                  </li>
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">Moneda:</span>
+                    <span class="primary-color-3">{{ matricula?.transaccion?.currency  }}</span>
+                  </li>
+                  <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                    <span class="primary-color">Fecha:</span>
+                    <span class="primary-color-3">{{ matricula?.fecha | date:'MM/dd/yyyy' }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="shopping-cart-detail-item">
+              <h3 class="widget-title font-size-18">Nota:</h3>
+              <div class="shopping-cart-content  font-size-16 text-justify">
+                Te llegará un correo a la dirección electrónica registrada con la confirmación de esta matrícula. La Municipalidad Distrital de Santa Anita no se hace responsable por el ingreso incorrecto del correo electrónico. Es posible que reciba el correo en su bandeja de correos no deseados (SPAM), por favor verificar. Para cualquier consulta comunícate al correo: talleres@munisantanita.gob.pe
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shopping-cart-wrap table-responsive">
+            <table class="table table-bordered ">
+              <thead class="cart-head">
+              <tr>
+                <td class="cart__title" style="width: 150px">Imagen</td>
+                <td class="cart__title">Curso</td>
+                <td class="cart__title" style="width: 150px">Precio</td>
+              </tr>
+              </thead>
+              <tbody class="cart-body">
+              <tr  *ngFor="let item of matricula?.detalles">
+                <td><a [routerLink]="['/catalogo/cursos/detalle/' + item.seccion.id]" class="d-block"><img [src]="validarImagen(item.seccion)" alt="product image"></a></td>
+                <td>
+                  <div class="cart-product-desc">
+                    <a [routerLink]="['/catalogo/cursos/detalle/' + item.seccion.id]" class="widget-title">{{ item.seccion.taller.nombre }} ({{ item.seccion.edad.nombre }} años)</a>
+                    <a href="javascript:void(0);" class="widget-title">{{ item.seccion.dia.nombre }}</a>
+                    <a href="javascript:void(0);" class="widget-title">{{ item.seccion.hora.nombre }}</a>
+                  </div>
+                </td>
+                <td>
+                  <span class="item__price">S/ {{ parseNumber(item.seccion.precio).toFixed(2) }}</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-right">Total:</td>
+                <td>S/ {{ parseNumber(matricula?.importe).toFixed(2) }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-md-12 ">
+          <div class="shopping-cart-detail-item w-100" style="color: white;background: #4CAF50">
+            <h5 style="color: white">Sobre el acceso a las clases:</h5>
             <br>
-          </div>
-          <div class="col-md-6 text-right">
-
-            <h1 class="widget-title">Voucher</h1>
-            <div>N°. recibo: <strong class="color_bold">ABC-123</strong></div>
-            <div>Dirección: <strong class="color_bold">Lima - Perú</strong></div>
-            <div>Teléfono: <strong class="color_bold">(01) 123-4567</strong></div>
-
+            <p>Antes del inicio de tu clase, te llegará un correo a la dirección electrónica registrada en tu ficha de matrícula con toda la información para el acceso a tu curso. La Municipalidad Distrital de Santa Anita no se hace responsable por el ingreso incorrecto del correo electrónico.</p>
           </div>
         </div>
 
-        <div class="cart-detail-wrap mt-4">
-          <div class="row">
+        <div class="col-lg-12">
+          <div class="input-box">
 
-            <div class="col-lg-6">
-              <div class="shopping-cart-detail-item">
-                <h3 class="widget-title font-size-20">Datos personales</h3>
-                <div class="shopping-cart-content pt-2">
+            <br>
 
-                  <ul class="list-items">
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">Nombre:</span>
-                      <span class="primary-color-3">Taylor Swift</span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">DNI:</span>
-                      <span class="primary-color-3">12345678</span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">Número de móvil:</span>
-                      <span class="primary-color-3">987654321</span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">Correo electrónico:</span>
-                      <span class="primary-color-3">taylor@gmail.com</span>
-                    </li>
-                  </ul>
+            <div  class="requirement-wrap margin-bottom-30px">
+              <h5 class="font-size-16">Términos y Condiciones de Pago y Servicios</h5>
+              <p class="font-size-14">* Datos importantes que todo inscrito debe tener a fin de que se puedan adoptar las medidas correspondientes en caso de emergencias. Queda bajo responsabilidad del alumno o padre/apoderado la información pendiente en esta ficha de matrícula. Asimismo, la Municipalidad Distrital de Santa Anita no se hace responsable por el ingreso incorrecto del correo electrónico para el acceso a las clases.</p>
+              <p class="font-size-14">* Efectuada la inscripción y pago del alumno en los talleres, no habrá derecho a devolución del dinero ni ningún cambio de horario.</p>
+              <p class="font-size-14">* Cualquier tipo de incidencia, eventualidad, accidente o pérdida de objetos personales; no es responsabilidad de la Municipalidad Distrital de Santa Anita.</p>
+              <p class="font-size-14">* La Municipalidad Distrital de Santa Anita se reserva el derecho de separar definitivamente a los alumnos que infrinjan las normas de respeto durante el desarrollo de los talleres sin lugar a reclamo.</p>
+              <p class="font-size-14">* Los Grupos/Salones de talleres se confirman con un mínimo de 12 participantes. Caso contrario, la Municipalidad Distrital de Santa Anita se reserva el derecho de cerrar los Grupos/Salones dando la opción de manera extraordinaria de realizar un solo cambio. Por ningún motivo procede una devolución de dinero.</p>
+              <p class="font-size-14">* Doy fe que la información brindada es completa, actualizada y correcta. Asimismo, se tendrá respeto irrestricto al horario de clases establecido; por lo que es responsabilidad del alumno, el ingreso puntual a la hora de inicio del curso y a la salida. Los talleres no cumplen la función de guardería.</p>
+              <p class="font-size-14">* Acepto los Términos y Condiciones de Pago y Servicios. La confirmación de esta ficha garantiza los datos brindados previamente a manera de Declaración Jurada, sin lugar a reclamo.</p>
+              <br>
+              <p class="font-size-20 text-center">Para cualquier consulta comunícate al correo: <strong>talleres@munisantanita.gob.pe</strong></p>
 
-                </div>
+              <hr class="none-print" />
+              <div class="text-center none-print">
+                <button class="theme-btn" (click)="exportAsPDF()"> Imprimir </button>
               </div>
-            </div>
-            <div class="col-lg-6 ml-auto">
-              <div class="shopping-cart-detail-item">
-                <h3 class="widget-title font-size-20">Datos de la transacción</h3>
-                <div class="shopping-cart-content pt-2">
-                  <ul class="list-items">
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">Número de pedido:</span>
-                      <span class="primary-color-3">12345678</span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">N° de tarjeta enmascarada:</span>
-                      <span class="primary-color-3">123**********45</span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">Moneda:</span>
-                      <span class="primary-color-3">PEN</span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                      <span class="primary-color">Fecha:</span>
-                      <span class="primary-color-3">15/06/2021</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+
             </div>
 
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="shopping-cart-wrap table-responsive">
-              <table class="table table-bordered ">
-                <thead class="cart-head">
-                <tr>
-                  <td class="cart__title" style="width: 150px">Imagen</td>
-                  <td class="cart__title">Curso</td>
-                  <td class="cart__title" style="width: 150px">Precio</td>
-                </tr>
-                </thead>
-                <tbody class="cart-body">
-                <tr>
-                  <td><a [routerLink]="['/catalogo/cursos/detalle/1']" class="d-block"><img src="../../../../../../assets/images/img6.jpg" alt="product image"></a></td>
-                  <td>
-                    <div class="cart-product-desc">
-                      <a [routerLink]="['/catalogo/cursos/detalle/1']" class="widget-title">curso</a>
-                      <a href="javascript:void(0);" class="widget-title">lunes</a>
-                      <a href="javascript:void(0);" class="widget-title">de 04:00 pm a 05:00 pm</a>
-                    </div>
-                  </td>
-                  <td>
-                    <span class="item__price">S/ 50.00</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2" class="text-right">Total:</td>
-                  <td>S/ 50.00</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        </div>
+      </div>
     </div>
-
+    <div *ngIf="!matricula">
+      <div class="col-md-12">
+        <div class="error-content text-center">
+          <svg viewBox="0 0 56.724 56.724" style="height: 10em; width: 10em;">
+            <path d="M7.487,46.862c1.111,1.467,2.865,2.275,4.938,2.275h30.598c3.984,0,7.934-3.009,8.991-6.849
+              l4.446-16.136c0.55-1.997,0.237-3.904-0.88-5.371c-1.118-1.467-2.873-2.274-4.945-2.274h-3.044l-0.667-2.65
+              c-0.692-2.759-4.368-4.919-8.367-4.919h-11.24c-2.932,0-4.935-0.6-5.413-0.94c-1.259-2.292-6.867-2.41-8-2.41h-7.27
+              c-2.036,0-3.845,0.798-5.093,2.249c-1.248,1.45-1.769,3.356-1.448,5.467l6.338,29.047C6.572,45.268,6.926,46.122,7.487,46.862z
+               M53.193,22.599c0.537,0.705,0.669,1.684,0.374,2.756l-4.445,16.137c-0.693,2.518-3.486,4.646-6.099,4.646H12.425
+              c-1.112,0-2.016-0.386-2.547-1.086c-0.531-0.701-0.657-1.676-0.356-2.746l3.057-10.858c0.709-2.518,3.518-4.646,6.133-4.646h9.751
+              c3.51,0,7.461-1.271,8.219-3.695c0.196-0.479,2.256-1.6,5.359-1.6h8.593C51.749,21.507,52.657,21.895,53.193,22.599z M3.815,11.792
+              c0.669-0.777,1.671-1.206,2.82-1.206h7.27c2.932,0,4.935,0.6,5.413,0.941c1.26,2.292,6.866,2.41,7.999,2.41h11.241
+              c2.743,0,5.144,1.399,5.458,2.65l0.482,1.919h-2.456c-3.511,0-7.461,1.271-8.219,3.695c-0.197,0.479-2.257,1.6-5.359,1.6h-9.751
+              c-3.979,0-7.942,3.001-9.021,6.832l-1.793,6.371L3.042,14.758C2.871,13.623,3.146,12.569,3.815,11.792z"/>
+          </svg>
+          <div class="section-heading mt-5">
+            <h2 class="section__title pb-3 font-size-30">¡Ups!</h2>
+            <h3 class="section__desc font-size-25">El voucher no existe</h3>
+          </div>
+          <div class="btn-box">
+            <a [routerLink]="['/']" class="theme-btn">Volver al inicio</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

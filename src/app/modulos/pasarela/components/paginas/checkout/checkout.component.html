@@ -32,8 +32,23 @@
 
 <section class="checkout-area padding-top-120px padding-bottom-70px">
   <div class="container">
+    <div class="row" *ngIf="!pre_pago">
+      <div class="col-md-12">
+        <div class="error-content text-center">
+          <svg viewBox="0 0 512 512" style="height: 10em; width: 10em;">
+            <path d="m512 163v-27c0-30.928-25.072-56-56-56h-400c-30.928 0-56 25.072-56 56v27c0 2.761 2.239 5 5 5h502c2.761 0 5-2.239 5-5z"/>
+            <path d="m0 205v171c0 30.928 25.072 56 56 56h400c30.928 0 56-25.072 56-56v-171c0-2.761-2.239-5-5-5h-502c-2.761 0-5 2.239-5 5zm128 131c0 8.836-7.164 16-16 16h-16c-8.836 0-16-7.164-16-16v-16c0-8.836 7.164-16 16-16h16c8.836 0 16 7.164 16 16z"/>
+          </svg>
 
-    <div class="row">
+          <div class="section-heading mt-5">
+            <h2 class="section__title pb-3 font-size-30">¡Gracias por visitarnos!</h2>
+            <h3 class="section__desc font-size-25">Desde este martes a las 01:30pm podrás matricularte en los cursos de tu preferencia. ¡Te esperamos!</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="pre_pago">
 
       <div class="col-lg-8">
         <div class="card-box-shared">
@@ -46,7 +61,7 @@
             <div class="user-form">
               <div class="contact-form-action">
 
-                <form>
+                <form [formGroup]="formEstudiante">
 
 
                   <div class="row">
@@ -58,9 +73,10 @@
                         <label class="label-text">DNI:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
                           <div style="position: relative">
-                            <input class="form-control" type="text"  placeholder="DNI" >
+                            <input class="form-control" type="text" formControlName="dni" (keypress)="numberOnly($event)" maxlength="8" placeholder="DNI" #miDNI (input)="buscarEstudiantePorDni(miDNI.value)" [ngClass]="{'is-invalid': checkInput('dni', 'invalid')}">
                             <span class="la la-user input-icon"></span>
                           </div>
+                          <span *ngIf="checkInput('dni', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
 
                       </div>
@@ -69,8 +85,9 @@
                       <div class="input-box">
                         <label class="label-text">Fecha de nacimiento:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="date"   placeholder="Fecha de nacimiento">
+                          <input class="form-control" type="date" formControlName="fecha_nacimiento" #miFechaNacimiento (input)="validarEdad(miFechaNacimiento.value)" placeholder="Fecha de nacimiento" [ngClass]="{'is-invalid': checkInput('fecha_nacimiento', 'invalid')}">
                           <span class="la la-calendar input-icon"></span>
+                          <span *ngIf="checkInput('fecha_nacimiento', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -79,8 +96,9 @@
                       <div class="input-box">
                         <label class="label-text">Nombres:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Nombres">
+                          <input class="form-control" type="text" formControlName="nombres" placeholder="Nombres" [ngClass]="{'is-invalid': checkInput('nombres', 'invalid')}">
                           <span class="la la-user input-icon"></span>
+                          <span *ngIf="checkInput('nombres', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -88,8 +106,9 @@
                       <div class="input-box">
                         <label class="label-text">Apellido paterno:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Apellido paterno">
+                          <input class="form-control" type="text" formControlName="ape_paterno" placeholder="Apellido paterno" [ngClass]="{'is-invalid': checkInput('ape_paterno', 'invalid')}">
                           <span class="la la-user input-icon"></span>
+                          <span *ngIf="checkInput('ape_paterno', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -97,8 +116,9 @@
                       <div class="input-box">
                         <label class="label-text">Apellido materno:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Apellido materno">
+                          <input class="form-control" type="text" formControlName="ape_materno" placeholder="Apellido materno" [ngClass]="{'is-invalid': checkInput('ape_materno', 'invalid')}">
                           <span class="la la-user input-icon"></span>
+                          <span *ngIf="checkInput('ape_materno', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -108,12 +128,13 @@
                         <label class="label-text">Sexo:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
                           <div class="sort-ordering user-form-short">
-                            <select class="sort-ordering-select form-control" >
+                            <select class="sort-ordering-select form-control" formControlName="sexo">
                               <option value="Hombre" [selected]="true">Hombre</option>
                               <option value="Mujer">Mujer</option>
                               <option value="Otros">Otros</option>
                             </select>
                             <span class="la la-user input-icon"></span>
+                            <span *ngIf="checkInput('sexo', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                           </div>
                         </div>
                       </div>
@@ -122,8 +143,9 @@
                       <div class="input-box">
                         <label class="label-text">Dirección de domicilio:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Dirección">
+                          <input class="form-control" type="text" formControlName="direccion" placeholder="Dirección" [ngClass]="{'is-invalid': checkInput('direccion', 'invalid')}">
                           <span class="la la-map-marker input-icon"></span>
+                          <span *ngIf="checkInput('direccion', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -131,10 +153,11 @@
                       <div class="input-box">
                         <label class="label-text">Distrito de domicilio:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" formControlName="distrito_de_domicilio" [ngClass]="{'is-invalid': checkInput('distrito_de_domicilio', 'invalid')}">
+                            <option *ngFor="let distrito of distritosDomicilio; let index = index" value="{{distrito.id}}" [selected]="index == 0">{{distrito.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
+                          <span *ngIf="checkInput('distrito_de_domicilio', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -143,8 +166,8 @@
                       <div class="input-box">
                         <label class="label-text">Departamento (nacimiento):</label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" #miDepartamento (change)="mostrarProvincias(miDepartamento.value)" formControlName="departamento">
+                            <option *ngFor="let departamento of departamentos; let index = index" value="{{departamento.id}}" [selected]="index == 0">{{departamento.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
                         </div>
@@ -154,8 +177,8 @@
                       <div class="input-box">
                         <label class="label-text">Provincia (nacimiento):</label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" #miProvincia (change)="mostrarDistritos(miProvincia.value)" formControlName="provincia">
+                            <option *ngFor="let provincia of provincias; let index = index" value="{{provincia.id}}" [selected]="index == 0">{{provincia.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
                         </div>
@@ -165,8 +188,8 @@
                       <div class="input-box">
                         <label class="label-text">Distrito (nacimiento):</label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" formControlName="distrito">
+                            <option *ngFor="let distrito of distritos; let index = index" value="{{distrito.id}}" [selected]="index == 0">{{distrito.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
                         </div>
@@ -177,7 +200,7 @@
                       <div class="input-box">
                         <label class="label-text">Número de teléfono fijo:</label>
                         <div class="form-group">
-                          <input class="form-control" type="number"  placeholder="Número de teléfono fijo">
+                          <input class="form-control" type="number" formControlName="telefono" placeholder="Número de teléfono fijo">
                           <span class="la la-phone input-icon"></span>
                         </div>
                       </div>
@@ -186,8 +209,9 @@
                       <div class="input-box">
                         <label class="label-text">Número de móvil (celular):<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="number"  placeholder="Número de móvil (celular) ">
+                          <input class="form-control" type="number" formControlName="movil" (keypress)="numberOnly($event)" maxlength="9" placeholder="Número de móvil (celular) " [ngClass]="{'is-invalid': checkInput('movil', 'invalid')}">
                           <span class="la la-mobile-phone input-icon"></span>
+                          <span *ngIf="checkInput('movil', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -196,8 +220,10 @@
                       <div class="input-box">
                         <label class="label-text">Correo electrónico:<span class="primary-color-2 ml-1">*</span> </label> <span class="ml-1">(Para acceso al dictado de clases del alumno)</span>
                         <div class="form-group">
-                          <input class="form-control" type="email"  placeholder="Correo electrónico">
+                          <input class="form-control" type="email" formControlName="correo" placeholder="Correo electrónico" [ngClass]="{'is-invalid': checkInput('correo', 'invalid')}">
                           <span class="la la-envelope input-icon"></span>
+                          <span *ngIf="checkInput('correo', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
+                          <span *ngIf="checkInput('correo', 'invalid', 'correoNotEquivalent')" class="msj-err"><i class="fa fa-times"></i>Los correos ingresados no coinciden.</span>
                         </div>
                       </div>
                     </div>
@@ -206,8 +232,10 @@
                       <div class="input-box">
                         <label class="label-text">Confirmar correo electrónico:<span class="primary-color-2 ml-1">*</span> </label>
                         <div class="form-group">
-                          <input class="form-control" type="email"  placeholder="Repetir correo electrónico">
+                          <input class="form-control" type="email" formControlName="correo_confirmacion" placeholder="Repetir correo electrónico" [ngClass]="{'is-invalid': checkInput('correo_confirmacion', 'invalid')}">
                           <span class="la la-envelope input-icon"></span>
+                          <span *ngIf="checkInput('correo_confirmacion', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
+                          <span *ngIf="checkInput('correo_confirmacion', 'invalid', 'correoNotEquivalent')" class="msj-err"><i class="fa fa-times"></i>Los correos ingresados no coinciden.</span>
                         </div>
                       </div>
                     </div>
@@ -217,10 +245,11 @@
                         <label class="label-text">Tipo de seguro médico:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
                           <div class="sort-ordering user-form-short">
-                            <select class="form-control" >
-                              <option>Seleccionar</option>
+                            <select class="form-control" formControlName="seguro" [ngClass]="{'is-invalid': checkInput('seguro', 'invalid')}">
+                              <option *ngFor="let seguro of seguros;" value="{{seguro.id}}">{{seguro.nombre}}</option>
                             </select>
                             <span class="la la-file input-icon"></span>
+                            <span *ngIf="checkInput('seguro', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                           </div>
                         </div>
                       </div>
@@ -230,8 +259,8 @@
                       <div class="input-box">
                         <label class="label-text">Tipo de grupo sanguíneo:</label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" formControlName="sanguineo">
+                            <option *ngFor="let sanguineo of grupoSanguineos; let i = index;" value="{{sanguineo.id}}">{{sanguineo.nombre}}</option>
                           </select>
                           <span class="la la-file input-icon"></span>
                         </div>
@@ -242,7 +271,7 @@
                       <div class="input-box">
                         <label class="label-text">Enfermedades y/o alergias que padece el estudiante:</label>
                         <div class="form-group">
-                          <textarea class="form-control" rows="1"  placeholder="Enfermedades y/o alergias que padece el estudiante"></textarea>
+                          <textarea class="form-control" rows="1" formControlName="enfermedades" placeholder="Enfermedades y/o alergias que padece el estudiante"></textarea>
                           <span class="la la-file input-icon"></span>
                         </div>
                       </div>
@@ -252,7 +281,7 @@
                       <div class="input-box">
                         <label class="label-text">Antibióticos y/o medicinas que deba ser suministrado en caso de emergencia:</label>
                         <div class="form-group">
-                          <textarea class="form-control" rows="1"  placeholder="Antibióticos y/o medicinas que deba ser suministrado en caso de emergencia"></textarea>
+                          <textarea class="form-control" rows="1" formControlName="medicinas" placeholder="Antibióticos y/o medicinas que deba ser suministrado en caso de emergencia"></textarea>
                           <span class="la la-file input-icon"></span>
                         </div>
                       </div>
@@ -261,8 +290,8 @@
                   </div>
                 </form>
 
-                <form>
-                  <div class="row form-group-optional mt-3">
+                <form [formGroup]="formApoderado">
+                  <div class="row form-group-optional mt-3" [hidden]="isAdult">
                     <!-- APODERADO -->
                     <div class="col-md-12"><h4 class="mb-3">Datos del padre o apoderado</h4></div>
 
@@ -271,9 +300,10 @@
                         <label class="label-text">DNI:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
                           <div style="position: relative">
-                            <input class="form-control" type="text"  placeholder="DNI">
+                            <input class="form-control" type="text" formControlName="dni" (keypress)="numberOnly($event)" maxlength="8" placeholder="DNI"  #miDNIApo (input)="buscarApoderadoPorDni(miDNIApo.value)" [ngClass]="{'is-invalid': checkInputApoderado('dni', 'invalid')}">
                             <span class="la la-user input-icon"></span>
                           </div>
+                          <span *ngIf="checkInputApoderado('dni', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
 
                         </div>
                       </div>
@@ -282,8 +312,9 @@
                       <div class="input-box">
                         <label class="label-text">Fecha de nacimiento:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="date"  placeholder="Fecha de nacimiento">
+                          <input class="form-control" type="date" formControlName="fecha_nacimiento" placeholder="Fecha de nacimiento" [ngClass]="{'is-invalid': checkInputApoderado('fecha_nacimiento', 'invalid')}">
                           <span class="la la-calendar input-icon"></span>
+                          <span *ngIf="checkInputApoderado('fecha_nacimiento', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -292,8 +323,9 @@
                       <div class="input-box">
                         <label class="label-text">Nombres:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Nombres">
+                          <input class="form-control" type="text" formControlName="nombres" placeholder="Nombres" [ngClass]="{'is-invalid': checkInputApoderado('nombres', 'invalid')}">
                           <span class="la la-user input-icon"></span>
+                          <span *ngIf="checkInputApoderado('nombres', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -301,8 +333,9 @@
                       <div class="input-box">
                         <label class="label-text">Apellido paterno:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Apellido paterno">
+                          <input class="form-control" type="text" formControlName="ape_paterno" placeholder="Apellido paterno" [ngClass]="{'is-invalid': checkInputApoderado('ape_paterno', 'invalid')}">
                           <span class="la la-user input-icon"></span>
+                          <span *ngIf="checkInputApoderado('ape_paterno', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -310,8 +343,9 @@
                       <div class="input-box">
                         <label class="label-text">Apellido materno:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Apellido materno">
+                          <input class="form-control" type="text" formControlName="ape_materno" placeholder="Apellido materno" [ngClass]="{'is-invalid': checkInputApoderado('ape_materno', 'invalid')}">
                           <span class="la la-user input-icon"></span>
+                          <span *ngIf="checkInputApoderado('ape_materno', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -320,8 +354,9 @@
                       <div class="input-box">
                         <label class="label-text">Dirección de domicilio:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Dirección">
+                          <input class="form-control" type="text" formControlName="direccion" placeholder="Dirección" [ngClass]="{'is-invalid': checkInputApoderado('direccion', 'invalid')}">
                           <span class="la la-map-marker input-icon"></span>
+                          <span *ngIf="checkInputApoderado('direccion', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -329,10 +364,11 @@
                       <div class="input-box">
                         <label class="label-text">Distrito de domicilio:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" formControlName="distrito_de_domicilio" [ngClass]="{'is-invalid': checkInputApoderado('distrito_de_domicilio', 'invalid')}">
+                            <option *ngFor="let distrito of distritosDomicilio; let index = index" value="{{distrito.id}}" [selected]="index == 0">{{distrito.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
+                          <span *ngIf="checkInputApoderado('distrito_de_domicilio', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -341,10 +377,11 @@
                       <div class="input-box">
                         <label class="label-text">Departamento (nacimiento):<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <select class="form-control"  >
-                            <option>Seleccionar</option>
+                          <select class="form-control" #miDepartamentoApo (change)="mostrarProvinciasApo(miDepartamentoApo.value)" formControlName="departamento"  [ngClass]="{'is-invalid': checkInputApoderado('departamento', 'invalid')}">
+                            <option *ngFor="let departamento of departamentosApo; let index = index" value="{{departamento.id}}" [selected]="index == 0">{{departamento.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
+                          <span *ngIf="checkInputApoderado('departamento', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -352,10 +389,11 @@
                       <div class="input-box">
                         <label class="label-text">Provincia (nacimiento):<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" #miProvinciaApo (change)="mostrarDistritosApo(miProvinciaApo.value)" formControlName="provincia" [ngClass]="{'is-invalid': checkInputApoderado('provincia', 'invalid')}">
+                            <option *ngFor="let provincia of provinciasApo; let index = index" value="{{provincia.id}}" [selected]="index == 0">{{provincia.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
+                          <span *ngIf="checkInputApoderado('provincia', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -363,10 +401,11 @@
                       <div class="input-box">
                         <label class="label-text">Distrito (nacimiento):<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <select class="form-control" >
-                            <option>Seleccionar</option>
+                          <select class="form-control" formControlName="distrito" [ngClass]="{'is-invalid': checkInputApoderado('distrito', 'invalid')}">
+                            <option *ngFor="let distrito of distritosApo; let index = index" value="{{distrito.id}}" [selected]="index == 0">{{distrito.nombre}}</option>
                           </select>
                           <span class="la la-map-marker input-icon"></span>
+                          <span *ngIf="checkInputApoderado('distrito', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -375,7 +414,7 @@
                       <div class="input-box">
                         <label class="label-text">Número de teléfono fijo:</label>
                         <div class="form-group">
-                          <input class="form-control" type="number"  placeholder="Número de teléfono fijo" >
+                          <input class="form-control" type="number" formControlName="telefono" placeholder="Número de teléfono fijo" >
                           <span class="la la-phone input-icon"></span>
                         </div>
                       </div>
@@ -384,8 +423,9 @@
                       <div class="input-box">
                         <label class="label-text">Número de móvil (celular):<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="text"  placeholder="Número de móvil (celular) ">
+                          <input class="form-control" type="text" formControlName="movil" (keypress)="numberOnly($event)" maxlength="9" placeholder="Número de móvil (celular) " [ngClass]="{'is-invalid': checkInputApoderado('movil', 'invalid')}">
                           <span class="la la-mobile-phone input-icon"></span>
+                          <span *ngIf="checkInputApoderado('movil', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -394,8 +434,9 @@
                       <div class="input-box">
                         <label class="label-text">Correo electrónico:<span class="primary-color-2 ml-1">*</span></label>
                         <div class="form-group">
-                          <input class="form-control" type="email"  placeholder="Correo electrónico">
+                          <input class="form-control" type="email" formControlName="correo" placeholder="Correo electrónico" [ngClass]="{'is-invalid': checkInputApoderado('correo', 'invalid')}">
                           <span class="la la-envelope input-icon"></span>
+                          <span *ngIf="checkInputApoderado('correo', 'invalid', 'required')" class="msj-err"><i class="fa fa-times"></i>El campo es requerido</span>
                         </div>
                       </div>
                     </div>
@@ -413,6 +454,26 @@
                           <p class="font-size-14">¡Su información está segura con nosotros!</p>
                         </div>
                         <br>
+                        <!--<div class="form-group">
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="chb1" [ngClass]="{'is-invalid': checkInput('-invalid', 'invalid')}">
+                            <label for="chb1">Acepto los <a href="#" class="primary-color-2">Términos de servicio</a> y la <a href="#" class="primary-color-2">Política de privacidad</a></label>
+                          </div>
+                        </div>-->
+
+                        <div  class="requirement-wrap margin-bottom-30px">
+                          <h5 class="font-size-16">Términos y Condiciones de Pago y Servicios</h5>
+                          <p class="font-size-14">* Datos importantes que todo inscrito debe tener a fin de que se puedan adoptar las medidas correspondientes en caso de emergencias. Queda bajo responsabilidad del alumno o padre/apoderado la información pendiente en esta ficha de matrícula. Asimismo, la Municipalidad Distrital de Lima no se hace responsable por el ingreso incorrecto del correo electrónico para el acceso a las clases.</p>
+                          <p class="font-size-14">* Efectuada la inscripción y pago del alumno en los talleres, no habrá derecho a devolución del dinero ni ningún cambio de horario.</p>
+                          <p class="font-size-14">* Cualquier tipo de incidencia, eventualidad, accidente o pérdida de objetos personales; no es responsabilidad de la Municipalidad Distrital de Lima.</p>
+                          <p class="font-size-14">* La Municipalidad Distrital de Lima se reserva el derecho de separar definitivamente a los alumnos que infrinjan las normas de respeto durante el desarrollo de los talleres sin lugar a reclamo.</p>
+                          <p class="font-size-14">* Los Grupos/Salones de talleres se confirman con un mínimo de 12 participantes. Caso contrario, la Municipalidad Distrital de Lima se reserva el derecho de cerrar los Grupos/Salones dando la opción de manera extraordinaria de realizar un solo cambio. Por ningún motivo procede una devolución de dinero.</p>
+                          <p class="font-size-14">* Doy fe que la información brindada es completa, actualizada y correcta. Asimismo, se tendrá respeto irrestricto al horario de clases establecido; por lo que es responsabilidad del alumno, el ingreso puntual a la hora de inicio del curso y a la salida. Los talleres no cumplen la función de guardería.</p>
+                          <p class="font-size-14">* Acepto los Términos y Condiciones de Pago y Servicios. La confirmación de esta ficha garantiza los datos brindados previamente a manera de Declaración Jurada, sin lugar a reclamo.</p>
+                        </div>
+                        <!--<div class="btn-box pb-3">
+                          <button class="theme-btn theme-btn-light line-height-40">Crear facturación</button>
+                        </div>-->
 
                       </div>
                     </div>
@@ -432,7 +493,16 @@
           </div>
           <div class="card-box-shared-body">
             <div class="shopping-cart-content">
+              <p class="alert alert-danger text-center" *ngIf="validarMostrarAlertaMensajeError">No se completaron todos los campos obligatorios</p>
               <ul class="list-items">
+                <!--<li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                  :<span class="primary-color">Precio original:</span>
+                  :<span class="primary-color-3">S/ {{ parseNumber(total).toFixed(2) }}</span>
+                </li>-->
+                <!--<li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                  :<span class="primary-color">Descuento por cupón:</span>
+                  :<span class="primary-color-3">-S/ 0.00</span>
+                </li>-->
 
                 <li class="d-flex align-items-center justify-content-between font-size-18 font-weight-bold">
                   <span class="primary-color">Total:</span>
@@ -441,7 +511,13 @@
               </ul>
               <div class="btn-box mt-2">
                 <p class="font-size-14 line-height-22 mb-2">Al completar su compra, acepta estos Términos y Condiciones de Pago y Servicios.</p>
-                <a [routerLink]="['/pasarela/voucher/15/1234']" class="theme-btn d-block text-center w-100">Procesar compra</a>
+                <!--<a [routerLink]="['/pasarela/voucher']" class="theme-btn d-block text-center">Procesar compra</a>-->
+                <button type="button" class="theme-btn d-block text-center w-100" (click)="guardar()">Procesar compra</button>
+                <hr>
+                <div class="text-center">
+                  <p><strong>¿Cómo utilizar tu tarjeta para pagar?</strong></p>
+                  <button class="btn btn-info w-100 p-2" (click)="abrirInscrucciones()">Instrucciones de Pago</button>
+                </div>
               </div>
             </div>
           </div>
@@ -458,6 +534,5 @@
 
 
 </ng-template>
-
 
 

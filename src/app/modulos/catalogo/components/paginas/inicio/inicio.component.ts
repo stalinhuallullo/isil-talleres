@@ -38,8 +38,13 @@ export class InicioComponent implements OnInit {
     this.getSeccionesPorCategoria(9);
     this.getSeccionesPorCategoria(6);
 
+    this.showAnuncio();
+
+  }
+
+  showAnuncio(): void{
     Swal.fire({
-      imageUrl: 'https://www.munisantanita.gob.pe/data/web/recursos/isil-promo-1.jpeg',
+      imageUrl: 'https://pbs.twimg.com/profile_banners/119387609/1590081718/1500x500',
       imageAlt: 'Custom image',
       html:'<h3>Cursos en los que se aplica la promoción</h3><br>' +
         '<p><strong>Fútbol (7 - 15 años)</strong></p>' +
@@ -49,7 +54,6 @@ export class InicioComponent implements OnInit {
       showConfirmButton: false
     })
   }
-
   getSeccionesPorCategoria(cod: number): void{
     this.serviceSecciones.getSeccionesPorCategoria(cod).subscribe(data => {
       if(cod == 3)  this.categoria2 = data;

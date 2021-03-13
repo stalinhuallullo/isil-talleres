@@ -6,11 +6,12 @@ import { CheckoutComponent } from './components/paginas/checkout/checkout.compon
 import { ShoppingComponent } from './components/paginas/shopping/shopping.component';
 import { VoucherComponent } from './components/paginas/voucher/voucher.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ModalNiubizComponent} from './fragments/modal-niubiz/modal-niubiz.component';
 
 
 
 @NgModule({
-  declarations: [CheckoutComponent,ShoppingComponent, VoucherComponent],
+  declarations: [CheckoutComponent,ShoppingComponent, VoucherComponent, ModalNiubizComponent],
     imports: [
         CommonModule,
         PasarelaRoutingModule,
